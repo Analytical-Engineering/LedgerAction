@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct TransactionTabView: View {
     //MARK:  PROPERTIES
@@ -19,8 +20,8 @@ struct TransactionTabView: View {
     @State private var selectedCategory: Category = .expense
     @State private var selectedTransaction: Transaction?
     /// For Animation
-//    @Namespace private var animation
-    
+    @Namespace private var animation
+    @Query(sort: [SortDescriptor(\Transaction.dateAdded, order: .reverse)], animation: .snappy) private var transactions: [Transaction]
     var body: some View {
         GeometryReader{
             let size = $0.size
@@ -38,23 +39,29 @@ struct TransactionTabView: View {
                                         .font(.callout)
                                         .fontWeight(.bold)
                                         .foregroundStyle(.colorBlue)
-                            }.padding(5)
-                            .background {
+                            }
+                                .hSpacing(.leading)
+                                .padding(5)
+                            .background {///date range button rectangle
                                 RoundedRectangle(cornerRadius: 5, style: .continuous)
                                     .fill(.colorTitanium)
                                     .shadow(color: .colorTitanium, radius: 4, x: 2, y: 2)
                             }
-                            /// HEADER CARD VIEW
-                          CardView(income: 2039, expense: 1764)
-                            ///  CATEGORY SEGMENTED PICKER
-                            Picker("", selection: $selectedCategory) {
-                                ForEach(Category.allCases, id: \.rawValue) { category in
-                                    Text("\(category.rawValue)")
-                                        .tag(category)
+                            
+                            FilterTransactionsView(startDate: startDate, endDate: endDate) { transactions in
+                                /// HEADER CARD VIEW
+                                CardView(income: 2039, expense: 1764)
+                                ///  CATEGORY SEGMENTED PICKER
+                                Picker("", selection: $selectedCategory) {
+                                    ForEach(Category.allCases, id: \.rawValue) { category in
+                                        Text("\(category.rawValue)")
+                                            .tag(category)
+                                    }
                                 }
-                            }  
+                                .padding(.horizontal, 5)
+                            }
                             .pickerStyle(.segmented)
-                            .padding(.horizontal, 5)
+                            
                             FilterTransactionsView(startDate: startDate, endDate: endDate, category: selectedCategory) { transactions in
                                 ForEach(transactions) { transaction in
                                     TransactionCardView(transaction: transaction)
@@ -96,7 +103,7 @@ struct TransactionTabView: View {
                                 }
                                 .sheet(isPresented: $addTransaction) {
                                     AddTransactionView()
-                                        .presentationDetents([.height(350)])
+                                        .presentationDetents([.large])
                                 }
                             }
                             .padding(.bottom, userName.isEmpty ? 10 : 5)
@@ -118,9 +125,11 @@ struct TransactionTabView: View {
                 }
                 .blur(radius:showFilterView ? 8 : 0)
                 .disabled(showFilterView)
+                .navigationDestination(item: $selectedTransaction) { transaction in
+                    AddTransactionView(editTransaction: transaction)
+                }
             }
             .overlay {
-                
                     if showFilterView {
                         DateFilterView(start: startDate, end: endDate, onSubmit: {start, end in
                             startDate = start
@@ -135,7 +144,7 @@ struct TransactionTabView: View {
                 .animation(.snappy, value: showFilterView)
             }
         }
-    
+    //MARK:  FUNCTIONS
     func headerBGOpacity(_ proxy: GeometryProxy) -> CGFloat {
         let minY = proxy.frame(in: .scrollView).minY + safeArea.top
         return minY > 0 ? 0 : (-minY / 15)

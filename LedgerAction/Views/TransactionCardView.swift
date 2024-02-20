@@ -57,7 +57,7 @@ struct TransactionCardView: View {
         } actions: {
             Action(tint: .red, icon: "trash") {
                 context.delete(transaction)
-                WidgetCenter.shared.reloadAllTimelines()
+     //           WidgetCenter.shared.reloadAllTimelines()
             }
         }
     }

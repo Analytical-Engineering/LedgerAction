@@ -12,7 +12,7 @@ import SwiftData
 struct LedgerActionApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TabBarView()
         }
         .modelContainer(for: [Transaction.self])
     }

@@ -254,5 +254,5 @@ struct SettingsView: View {
 }
 
 #Preview {
-    ContentView()
+    TabBarView()
 }

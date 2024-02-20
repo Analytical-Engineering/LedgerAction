@@ -1,8 +1,8 @@
 //
-//  TabModel.swift
+//  Tab.swift
 //  LedgerAction
 //
-//  Created by J. DeWeese on 2/19/24.
+//  Created by J. DeWeese on 2/20/24.
 //
 
 import SwiftUI
@@ -14,16 +14,21 @@ enum Tab: String, CaseIterable {
     case budget = "Budget"
   case settings = "Settings"
     
-    var systemImage: String {
+    @ViewBuilder
+    var tabContent: some View {
         switch self {
         case .transactions:
-            return "dollarsign"
+            Image(systemName: "dollarsign")
+            Text(self.rawValue)
         case .bills:
-            return "dollarsign.arrow.circlepath"
+           Image(systemName:  "dollarsign.arrow.circlepath")
+            Text(self.rawValue)
         case .budget:
-            return "list.clipboard.fill"
+            Image(systemName:  "list.clipboard.fill")
+            Text(self.rawValue)
         case .settings:
-            return "gear"
+            Image(systemName: "gear")
+            Text(self.rawValue)
         }
     }
     
@@ -31,4 +36,5 @@ enum Tab: String, CaseIterable {
         return Tab.allCases.firstIndex(of: self) ?? 0
     }
 }
+
 
