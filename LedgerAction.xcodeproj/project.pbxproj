@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		12090BC32B84F829007371F1 /* LockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12090BC22B84F829007371F1 /* LockView.swift */; };
 		124A33C12B83E637007707E0 /* LedgerActionApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124A33C02B83E637007707E0 /* LedgerActionApp.swift */; };
 		124A33C32B83E637007707E0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124A33C22B83E637007707E0 /* ContentView.swift */; };
 		124A33C52B83E638007707E0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 124A33C42B83E638007707E0 /* Assets.xcassets */; };
@@ -34,6 +35,12 @@
 		124A341C2B845060007707E0 /* SwipeAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124A341B2B845060007707E0 /* SwipeAction.swift */; };
 		124A341E2B84601E007707E0 /* FilterTransactionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124A341D2B84601E007707E0 /* FilterTransactionsView.swift */; };
 		124A34202B8465CC007707E0 /* AddTransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124A341F2B8465CC007707E0 /* AddTransactionView.swift */; };
+		124A34222B8466FE007707E0 /* DateFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124A34212B8466FE007707E0 /* DateFilterView.swift */; };
+		124A34242B847999007707E0 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124A34232B847999007707E0 /* SettingsView.swift */; };
+		124A34262B847B2E007707E0 /* CustomShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124A34252B847B2E007707E0 /* CustomShareSheet.swift */; };
+		124A34282B847C12007707E0 /* ThemeChangeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124A34272B847C12007707E0 /* ThemeChangeView.swift */; };
+		124A342A2B847C58007707E0 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124A34292B847C58007707E0 /* LoadingView.swift */; };
+		124A342C2B847D1B007707E0 /* NotificationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124A342B2B847D1B007707E0 /* NotificationState.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +61,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		12090BC22B84F829007371F1 /* LockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockView.swift; sourceTree = "<group>"; };
 		124A33BD2B83E637007707E0 /* LedgerAction.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LedgerAction.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		124A33C02B83E637007707E0 /* LedgerActionApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LedgerActionApp.swift; sourceTree = "<group>"; };
 		124A33C22B83E637007707E0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -85,6 +93,12 @@
 		124A341B2B845060007707E0 /* SwipeAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeAction.swift; sourceTree = "<group>"; };
 		124A341D2B84601E007707E0 /* FilterTransactionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTransactionsView.swift; sourceTree = "<group>"; };
 		124A341F2B8465CC007707E0 /* AddTransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransactionView.swift; sourceTree = "<group>"; };
+		124A34212B8466FE007707E0 /* DateFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFilterView.swift; sourceTree = "<group>"; };
+		124A34232B847999007707E0 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		124A34252B847B2E007707E0 /* CustomShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomShareSheet.swift; sourceTree = "<group>"; };
+		124A34272B847C12007707E0 /* ThemeChangeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeChangeView.swift; sourceTree = "<group>"; };
+		124A34292B847C58007707E0 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		124A342B2B847D1B007707E0 /* NotificationState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,6 +190,7 @@
 			children = (
 				124A34062B83FCF1007707E0 /* Category.swift */,
 				124A34082B83FD4D007707E0 /* Transaction.swift */,
+				124A342B2B847D1B007707E0 /* NotificationState.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -183,6 +198,7 @@
 		124A33EC2B83E734007707E0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				124A34292B847C58007707E0 /* LoadingView.swift */,
 				124A34122B841E81007707E0 /* Tab Views */,
 				124A33C22B83E637007707E0 /* ContentView.swift */,
 				124A33F02B83EB6A007707E0 /* TabBarHome.swift */,
@@ -191,6 +207,9 @@
 				124A34192B845020007707E0 /* TransactionCardView.swift */,
 				124A341D2B84601E007707E0 /* FilterTransactionsView.swift */,
 				124A341F2B8465CC007707E0 /* AddTransactionView.swift */,
+				124A34212B8466FE007707E0 /* DateFilterView.swift */,
+				124A34232B847999007707E0 /* SettingsView.swift */,
+				12090BC22B84F829007371F1 /* LockView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -207,6 +226,8 @@
 				124A34132B842987007707E0 /* Date+Extension.swift */,
 				124A34152B842B71007707E0 /* HapticsManager.swift */,
 				124A341B2B845060007707E0 /* SwipeAction.swift */,
+				124A34252B847B2E007707E0 /* CustomShareSheet.swift */,
+				124A34272B847C12007707E0 /* ThemeChangeView.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -355,22 +376,29 @@
 				124A34202B8465CC007707E0 /* AddTransactionView.swift in Sources */,
 				124A34092B83FD4D007707E0 /* Transaction.swift in Sources */,
 				124A33F12B83EB6A007707E0 /* TabBarHome.swift in Sources */,
+				124A34222B8466FE007707E0 /* DateFilterView.swift in Sources */,
 				124A341A2B845020007707E0 /* TransactionCardView.swift in Sources */,
 				124A34012B83F8F3007707E0 /* Constants.swift in Sources */,
 				124A341E2B84601E007707E0 /* FilterTransactionsView.swift in Sources */,
+				124A342A2B847C58007707E0 /* LoadingView.swift in Sources */,
 				124A33FB2B83EC56007707E0 /* BudgetView.swift in Sources */,
 				124A33F32B83EB97007707E0 /* TabModel.swift in Sources */,
 				124A34182B84373D007707E0 /* CardView.swift in Sources */,
 				124A34052B83F9A0007707E0 /* TintColor.swift in Sources */,
 				124A33C32B83E637007707E0 /* ContentView.swift in Sources */,
+				124A342C2B847D1B007707E0 /* NotificationState.swift in Sources */,
 				124A33FD2B83F132007707E0 /* IntroScreen.swift in Sources */,
 				124A34142B842987007707E0 /* Date+Extension.swift in Sources */,
 				124A340F2B84052D007707E0 /* Views+Extension.swift in Sources */,
 				124A33F92B83EC49007707E0 /* TransactionTabView.swift in Sources */,
 				124A33F72B83EBDE007707E0 /* TabShape.swift in Sources */,
+				124A34282B847C12007707E0 /* ThemeChangeView.swift in Sources */,
 				124A34072B83FCF1007707E0 /* Category.swift in Sources */,
 				124A33C12B83E637007707E0 /* LedgerActionApp.swift in Sources */,
+				124A34262B847B2E007707E0 /* CustomShareSheet.swift in Sources */,
+				124A34242B847999007707E0 /* SettingsView.swift in Sources */,
 				124A33F52B83EBB7007707E0 /* TabPosition.swift in Sources */,
+				12090BC32B84F829007371F1 /* LockView.swift in Sources */,
 				124A33FF2B83F7A5007707E0 /* BillsView.swift in Sources */,
 				124A341C2B845060007707E0 /* SwipeAction.swift in Sources */,
 			);

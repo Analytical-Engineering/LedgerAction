@@ -20,12 +20,12 @@ struct IntroScreen: View {
             
             ///Main Points View
             VStack(alignment: .leading, spacing: 25, content: {
-                PointView(symbol: "dollarsign", title: "Transactions", subTitle: "Keep track of your earnings and expenses.")
+                PointView(symbol: "dollarsign", title: "Transactions", subTitle: "Keep track of your earnings and transactions.")
                 PointView(symbol: "filemenu.and.selection", title: "Budgets", subTitle: "Structure your fiscal health, utilizing smart budgets and bill reminders.")
 
                 PointView(symbol: "chart.bar.fill", title: "Visual Charts", subTitle: "View your transactions using eye-catching graphic representations.")
                 
-                PointView(symbol: "magnifyingglass", title: "Advance Filters", subTitle: "Find the expenses you want by advance search and filtering.")
+                PointView(symbol: "magnifyingglass", title: "Advance Filters", subTitle: "Find the transactions you want by advance search and filtering.")
                 
             })
             .frame(maxWidth: .infinity, alignment: .leading)

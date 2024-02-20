@@ -9,19 +9,21 @@ import SwiftUI
 
 /// App Tab's
 enum Tab: String, CaseIterable {
-    case expenses = "Expenses"
+    case transactions = "Transactions"
     case bills = "Bills"
     case budget = "Budget"
-  
+  case settings = "Settings"
     
     var systemImage: String {
         switch self {
-        case .expenses:
+        case .transactions:
             return "dollarsign"
         case .bills:
             return "dollarsign.arrow.circlepath"
         case .budget:
             return "list.clipboard.fill"
+        case .settings:
+            return "gear"
         }
     }
     

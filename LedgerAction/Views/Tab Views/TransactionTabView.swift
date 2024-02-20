@@ -29,12 +29,12 @@ struct TransactionTabView: View {
                     LazyVStack(spacing: 10, pinnedViews: [.sectionHeaders]) {
                         //MARK: BODY
                         Section {
-                            //MARK:  DATE RANGE FILTER BUTTON
+                            /// DATE RANGE FILTER BUTTON
                                 Button {
                                     showFilterView = true
                                     HapticManager.notification(type: .success)
                                 } label: {
-                                    Text("Date Range:   \(format(date: startDate,format: "dd MMM yy"))   -   \(format(date: endDate,format: "dd MMM yy"))")
+                                    Text("Select Range:   \(format(date: startDate,format: "dd MMM yy"))   -   \(format(date: endDate,format: "dd MMM yy"))")
                                         .font(.callout)
                                         .fontWeight(.bold)
                                         .foregroundStyle(.colorBlue)
@@ -42,11 +42,11 @@ struct TransactionTabView: View {
                             .background {
                                 RoundedRectangle(cornerRadius: 5, style: .continuous)
                                     .fill(.colorTitanium)
-                                    .shadow(color: .primary, radius: 4, x: 2, y: 2)
+                                    .shadow(color: .colorTitanium, radius: 4, x: 2, y: 2)
                             }
-                            //MARK:  HEADER CARD VIEW
+                            /// HEADER CARD VIEW
                           CardView(income: 2039, expense: 1764)
-                            //MARK:  CATEGORY SEGMENTED PICKER
+                            ///  CATEGORY SEGMENTED PICKER
                             Picker("", selection: $selectedCategory) {
                                 ForEach(Category.allCases, id: \.rawValue) { category in
                                     Text("\(category.rawValue)")
@@ -116,9 +116,26 @@ struct TransactionTabView: View {
                         }
                     }
                 }
+                .blur(radius:showFilterView ? 8 : 0)
+                .disabled(showFilterView)
+            }
+            .overlay {
+                
+                    if showFilterView {
+                        DateFilterView(start: startDate, end: endDate, onSubmit: {start, end in
+                            startDate = start
+                            endDate = end
+                            showFilterView = false
+                        }, onClose: {
+                            showFilterView = false
+                        })
+                        .transition(.move(edge: .leading))
+                    }
+                }
+                .animation(.snappy, value: showFilterView)
             }
         }
-    }
+    
     func headerBGOpacity(_ proxy: GeometryProxy) -> CGFloat {
         let minY = proxy.frame(in: .scrollView).minY + safeArea.top
         return minY > 0 ? 0 : (-minY / 15)

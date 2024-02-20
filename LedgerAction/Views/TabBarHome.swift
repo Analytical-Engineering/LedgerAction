@@ -17,7 +17,7 @@ struct TabBarHome: View {
     @AppStorage("isAppLockEnabled") private var isAppLockEnabled: Bool = false
     @AppStorage("lockWhenAppGoesBackground") private var lockWhenAppGoesBackground: Bool = false
     /// Active Tab
-    @State private var activeTab: Tab = .expenses
+    @State private var activeTab: Tab = .transactions
     /// For Smooth Shape Sliding Effect, We're going to use Matched Geometry Effect
     @Namespace private var animation
     @State private var tabShapePosition: CGPoint = .zero
@@ -26,14 +26,16 @@ struct TabBarHome: View {
         VStack(spacing: 0 ) {
             TabView(selection: $activeTab) {
                 TransactionTabView()
-                    .tag(Tab.expenses)
+                    .tag(Tab.transactions)
                 
                     BudgetView()
                     .tag(Tab.budget)
                   
                     BillsView()
                     .tag(Tab.bills)
-            
+                
+                SettingsView()
+                .tag(Tab.settings)
             }
             
             CustomTabBar()
