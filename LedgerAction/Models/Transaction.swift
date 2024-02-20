@@ -26,25 +26,18 @@ class Transaction: Codable {
         remarks: String,
         amount: Double,
         dateAdded: Date,
-        category: String,
-        tintColor: String,
-        enableReminder: Bool,
-        reminderID: String,
+        category: Category,
+        tintColor: TintColor,
         budget: Budget = .Savings
     ) {
         self.title = title
         self.remarks = remarks
         self.amount = amount
         self.dateAdded = dateAdded
-        self.category = category
-        self.tintColor = tintColor
-        self.enableReminder = enableReminder
-        self.reminderID = reminderID
+        self.category = category.rawValue
+        self.tintColor = tintColor.color
         self.budget = budget.rawValue
     }
-    
-    
-    
     
     /// Conforming Codable Protocol
     enum CodingKeys: CodingKey {
@@ -93,14 +86,12 @@ class Transaction: Codable {
     }
     var icon: Image {
         switch Budget(rawValue: budget)!  {
-            
         case .Needs:
             Image(systemName: "house.circle.fill")
         case .Wants:
             Image(systemName: "popcorn.circle.fill")
         case .Savings:
             Image(systemName: "building.columns.circle.fill")
-       
         }
     }
 }
@@ -123,3 +114,4 @@ enum Budget: Int, Codable, Identifiable, CaseIterable {
             }
         }
     }
+

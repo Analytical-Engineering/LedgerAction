@@ -1,5 +1,5 @@
 //
-//  ExpensesView.swift
+//  TransactionTabView.swift
 //  LedgerAction
 //
 //  Created by J. DeWeese on 2/19/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ExpensesView: View {
+struct TransactionTabView: View {
     //MARK:  PROPERTIES
     /// User Properties
     @AppStorage("userName") private var userName: String = ""
@@ -15,10 +15,11 @@ struct ExpensesView: View {
     @State private var startDate: Date = .now.startOfMonth
     @State private var endDate: Date = .now.endOfMonth
     @State private var showFilterView: Bool = false
+    @State private var addTransaction: Bool = false
     @State private var selectedCategory: Category = .expense
     @State private var selectedTransaction: Transaction?
     /// For Animation
-    @Namespace private var animation
+//    @Namespace private var animation
     
     var body: some View {
         GeometryReader{
@@ -51,12 +52,20 @@ struct ExpensesView: View {
                                     Text("\(category.rawValue)")
                                         .tag(category)
                                 }
-                                .padding()
-                            }  .pickerStyle(.segmented)
-                          
-                           
+                            }  
+                            .pickerStyle(.segmented)
+                            .padding(.horizontal, 5)
+                            FilterTransactionsView(startDate: startDate, endDate: endDate, category: selectedCategory) { transactions in
+                                ForEach(transactions) { transaction in
+                                    TransactionCardView(transaction: transaction)
+                                        .onTapGesture {
+                                            selectedTransaction = transaction
+                                        }
+                                }
+                            }
+                            .animation(.none, value: selectedCategory)
                         } header: {
-                            
+                            //MARK:  HEADER VIEW
                             HStack(spacing: 10) {
                                 VStack(alignment: .leading, spacing: 5, content: {
                                     Text("Welcome!")
@@ -73,8 +82,8 @@ struct ExpensesView: View {
                                         .scaleEffect(headerScale(size, proxy: geometryProxy), anchor: .topLeading)
                                 }
                                 Spacer(minLength: 0)
-                                NavigationLink {
-                                    TransactionView()
+                                Button {
+                                   addTransaction = true
                                     HapticManager.notification(type: .success)
                                 } label: {
                                     Image(systemName: "plus")
@@ -84,6 +93,10 @@ struct ExpensesView: View {
                                         .frame(width: 45, height: 45)
                                         .background(appTint.gradient, in: .circle)
                                         .contentShape(.circle)
+                                }
+                                .sheet(isPresented: $addTransaction) {
+                                    AddTransactionView()
+                                        .presentationDetents([.height(350)])
                                 }
                             }
                             .padding(.bottom, userName.isEmpty ? 10 : 5)
@@ -124,5 +137,5 @@ struct ExpensesView: View {
 
 
 #Preview {
-    ExpensesView()
+    TransactionTabView()
 }

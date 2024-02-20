@@ -25,7 +25,7 @@ struct TabBarHome: View {
     var body: some View {
         VStack(spacing: 0 ) {
             TabView(selection: $activeTab) {
-                ExpensesView()
+                TransactionTabView()
                     .tag(Tab.expenses)
                 
                     BudgetView()
