@@ -11,7 +11,13 @@ import SwiftUI
 struct TabBarHome: View {
 
     /// View Properties
-    @State private var activeTab: Tab = .budget
+    /// Intro Visibility Status
+    @AppStorage("isFirstTime") private var isFirstTime: Bool = true
+    /// App Lock Properties
+    @AppStorage("isAppLockEnabled") private var isAppLockEnabled: Bool = false
+    @AppStorage("lockWhenAppGoesBackground") private var lockWhenAppGoesBackground: Bool = false
+    /// Active Tab
+    @State private var activeTab: Tab = .expenses
     /// For Smooth Shape Sliding Effect, We're going to use Matched Geometry Effect
     @Namespace private var animation
     @State private var tabShapePosition: CGPoint = .zero
@@ -21,22 +27,21 @@ struct TabBarHome: View {
             TabView(selection: $activeTab) {
                 ExpensesView()
                     .tag(Tab.expenses)
-                    /// Hiding Native Tab Bar
-                    /// Bug on iOS 16.4
-                    // .toolbar(.hidden, for: .tabBar)
-
                 
                     BudgetView()
                     .tag(Tab.budget)
-                    /// Hiding Native Tab Bar
-                    /// Bug on iOS 16.4
-                    // .toolbar(.hidden, for: .tabBar)
-                
-                
+                  
+                    BillsView()
+                    .tag(Tab.bills)
+            
             }
             
             CustomTabBar()
-              
+    //            .tint(appTint)
+                .sheet(isPresented: $isFirstTime, content: {
+                    IntroScreen()
+                        .interactiveDismissDisabled()
+                })
         }
     }
     
@@ -48,7 +53,7 @@ struct TabBarHome: View {
         HStack(alignment: .bottom, spacing: 0) {
             ForEach(Tab.allCases, id: \.rawValue) {
                 TabItem(
-                    tint: tint,
+                    tint: appTint,
                     inactiveTint: inactiveTint,
                     tab: $0,
                     animation: animation,
