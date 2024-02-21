@@ -33,65 +33,66 @@ struct AddTransactionView: View {
         NavigationStack{
             ScrollView(.vertical) {
                 VStack(spacing: 15) {
-                    Text("Preview")
-                        .font(.caption)
-                        .foregroundStyle(.gray)
-                        .hSpacing(.leading)
-                    /// Preview Transaction Card View
-                    TransactionCardView(transaction: .init(
-                        title: title.isEmpty ? "Title" : title,
-                        remarks: remarks.isEmpty ? "Remarks" : remarks,
-                        amount: amount,
-                        dateAdded: dateAdded,
-                        category: category,
-                        tintColor: tint
-                    ))
+                    
                     CustomSection("Title", "Magic Keyboard", value: $title)
                     CustomSection("Remarks", "Apple Product!", value: $remarks)
                     /// Amount & Category Check Box
-                    VStack(alignment: .leading, spacing: 10, content: {
-                        Text("Amount & Category")
-                            .font(.caption)
-                            .foregroundStyle(.gray)
-                            .hSpacing(.leading)
-                        HStack(spacing: 15) {
-                            HStack(spacing: 4) {
-                                Text(currencySymbol)
-                                    .font(.callout.bold())
-                                TextField("", value: $amount, formatter: numberFormatter)
-                                    .keyboardType(.decimalPad)
-                            }
-                            .padding(.horizontal, 15)
-                            .padding(.vertical, 12)
-                            .background(.background, in: .rect(cornerRadius: 10))
-                            .frame(maxWidth: 130)
-                            /// Custom Check Box
+                    HStack{
+                        VStack(alignment: .leading, spacing: 5) {
+                            Text("Amount & Category")
+                                .font(.caption)
+                                .foregroundStyle(.gray)
                             CategoryCheckBox()
+                              
                         }
-                    })
-                    
-                    /// Notification View
-                    if enableNotifications && isNotificationAccessGiven == .approved {
-                        NotificationToggle()
+                        
+                        VStack( spacing: 5){
+                            Text("Receipts")
+                                .font(.caption)
+                                .foregroundStyle(.gray)
+                                .hSpacing(.center)
+                            Image(systemName: "photo")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 150, height: 150)
+                                .padding(.horizontal)
+                        }
                     }
-                    /// Date Picker
-                    VStack(alignment: .leading, spacing: 10, content: {
-                        Text("Date")
-                            .font(.caption)
-                            .foregroundStyle(.gray)
-                            .hSpacing(.leading)
-                        DatePicker("", selection: $dateAdded, displayedComponents: addReminder ? [.date, .hourAndMinute] : [.date])
-                            .datePickerStyle(.graphical)
-                            .padding(.horizontal, 15)
-                            .padding(.vertical, 12)
-                            .background(.background, in: .rect(cornerRadius: 10))
-                    })
+                    HStack(spacing: 4) {
+                        Text(currencySymbol)
+                            .font(.callout.bold())
+                        TextField("", value: $amount, formatter: numberFormatter)
+                            .padding(8)
+                            .padding(.horizontal, 10)
+                            .keyboardType(.decimalPad)
+                    }
+                    .frame(width: 200)
+                    .padding(.horizontal, 4)
+                    .background(.background, in: .rect(cornerRadius: 10))
+                    /// Custom Check Box
                 }
-                .padding(15)
+                /// Notification View
+                if enableNotifications && isNotificationAccessGiven == .approved {
+                    NotificationToggle()
+                }
+                /// Date Picker
+                VStack(alignment: .leading, spacing: 10, content: {
+                    Text("Date")
+                        .font(.caption)
+                        .foregroundStyle(.gray)
+                        .hSpacing(.leading)
+                    DatePicker("", selection: $dateAdded, displayedComponents: addReminder ? [.date, .hourAndMinute] : [.date])
+                        .datePickerStyle(.graphical)
+                        .padding(.horizontal, 15)
+                        .padding(.vertical, 12)
+                        .background(.background, in: .rect(cornerRadius: 10))
+                })
             }
+            .ignoresSafeArea()
+            .padding()
+            .background(.gray.opacity(0.15))
             .navigationTitle("\(editTransaction == nil ? "Add" : "Edit") Transaction")
             .navigationBarTitleDisplayMode(.inline)
-            .background(.gray.opacity(0.15))
             .toolbar(content: {
                 ToolbarItem(placement: .topBarTrailing){
                     Button{
@@ -167,21 +168,21 @@ struct AddTransactionView: View {
     }
     @ViewBuilder
     func CustomSection(_ title: String, _ hint: String, value: Binding<String>) -> some View {
-        VStack(alignment: .leading, spacing: 10, content: {
+        VStack(alignment: .leading, spacing: 5, content: {
             Text(title)
                 .font(.caption)
                 .foregroundStyle(.gray)
                 .hSpacing(.leading)
             TextField(hint, text: value)
-                .padding(.horizontal, 15)
-                .padding(.vertical, 12)
+                .padding(.horizontal, 10)
+                .padding(.vertical, 8)
                 .background(.background, in: .rect(cornerRadius: 10))
         })
     }
     /// Custom CheckBox
     @ViewBuilder
     func CategoryCheckBox() -> some View {
-        HStack(spacing: 10) {
+        VStack(spacing: 10) {
             ForEach(Category.allCases, id: \.rawValue) { category in
                 HStack(spacing: 5) {
                     ZStack {
@@ -202,11 +203,11 @@ struct AddTransactionView: View {
                     self.category = category
                 }
             }
+            .padding(2)
         }
         .padding(.horizontal, 15)
-        .padding(.vertical, 12)
-        .hSpacing(.leading)
-        .background(.background, in: .rect(cornerRadius: 10))
+        .frame(width: 150)
+        .background(.background, in: .rect(cornerRadius: 8))
     }
     /// Notification Toggle
     @ViewBuilder
@@ -255,4 +256,6 @@ struct AddTransactionView: View {
         return formatter
     }
 }
-
+#Preview {
+    TabBarView()
+}
