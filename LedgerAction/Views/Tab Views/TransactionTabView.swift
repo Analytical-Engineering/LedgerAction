@@ -126,7 +126,7 @@ struct TransactionTabView: View {
                 .blur(radius:showFilterView ? 8 : 0)
                 .disabled(showFilterView)
                 .navigationDestination(item: $selectedTransaction) { transaction in
-                    AddTransactionView(editTransaction: transaction)
+                    EditTransactionView(editTransaction: transaction)
                 }
             }
             .overlay {

@@ -17,6 +17,7 @@ struct IntroScreen: View {
                 .multilineTextAlignment(.center)
                 .padding(.top, 65)
                 .padding(.bottom, 35)
+                .foregroundStyle(.primary)
             
             ///Main Points View
             VStack(alignment: .leading, spacing: 25, content: {
@@ -30,43 +31,42 @@ struct IntroScreen: View {
             })
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.horizontal, 15)
-            
             Spacer()
-            
             Button(action: {
                 isFirstTime = false
+                HapticManager.notification(type: .success)
             }, label: {
                 Text("Continue")
                     .fontWeight(.bold)
                     .foregroundStyle(.white)
                     .frame(maxWidth: 350)
                     .padding(.vertical, 14)
-                    .background(.colorGreen.gradient, in: .rect(cornerRadius: 12))
+                    .background(.colorGrey.gradient, in: .rect(cornerRadius: 12))
                     .contentShape(.rect)
                     .padding(.bottom, 80)
             })
         }
-        .background(.colorTitanium.gradient, in: .rect(cornerRadius: 12))
+        .background(.blue.gradient, in: .rect(cornerRadius: 12))
         .ignoresSafeArea()
     }
-    
     /// Point View
     @ViewBuilder
     func PointView(symbol: String, title: String, subTitle: String) -> some View {
         HStack(spacing: 20) {
             Image(systemName: symbol)
                 .font(.largeTitle)
-                .foregroundStyle(.colorGreen.gradient)
+                .foregroundStyle(.colorBlack.gradient)
                 .frame(width: 45)
             
             VStack(alignment: .leading, spacing: 6, content: {
                 Text(title)
                     .font(.title3)
                     .fontWeight(.semibold)
+                    .foregroundStyle(.colorBlack)
                 
                 Text(subTitle)
                     .font(.callout)
-                    .foregroundStyle(.gray)
+                    .foregroundStyle(.primary)
             })
         }
     }

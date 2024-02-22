@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftData
 import UserNotifications
-
+import PhotosUI
 
 struct AddTransactionView: View {
     /// Env Properties
@@ -26,6 +26,9 @@ struct AddTransactionView: View {
     @State private var amount: Double = .zero
     @State private var dateAdded: Date = .now
     @State private var category: Category = .expense
+//    ///Photo Picker Properties
+//    @State private var selectedReceipt: PhotosPickerItem?
+//    @State private var selectedReceiptData: Data?
     /// Random Tint
     @State var tint: TintColor = tints.randomElement()!
     
@@ -34,8 +37,8 @@ struct AddTransactionView: View {
             ScrollView(.vertical) {
                 VStack(spacing: 15) {
                     
-                    CustomSection("Title", "Magic Keyboard", value: $title)
-                    CustomSection("Remarks", "Apple Product!", value: $remarks)
+                    CustomSection("Title", "Bass Pro", value: $title)
+                    CustomSection("Remarks", "Sig P229 Legion", value: $remarks)
                     /// Amount & Category Check Box
                     HStack{
                         VStack(alignment: .leading, spacing: 5) {
@@ -43,21 +46,14 @@ struct AddTransactionView: View {
                                 .font(.caption)
                                 .foregroundStyle(.gray)
                             CategoryCheckBox()
-                              
-                        }
-                        
-                        VStack( spacing: 5){
-                            Text("Receipts")
+                        //Photo Picker
+                            Text("Receipt")
                                 .font(.caption)
                                 .foregroundStyle(.gray)
                                 .hSpacing(.center)
-                            Image(systemName: "photo")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 150, height: 150)
-                                .padding(.horizontal)
-                        }
-                    }
+                            
+                                    }
+                                }
                     HStack(spacing: 4) {
                         Text(currencySymbol)
                             .font(.callout.bold())
@@ -107,6 +103,7 @@ struct AddTransactionView: View {
                     .tint(.gray)
                 }
             })
+        }
             .onAppear(perform: {
                 if let editTransaction {
                     /// Load All Existing Data from the Transaction
@@ -124,7 +121,6 @@ struct AddTransactionView: View {
                     reminderID = editTransaction.reminderID
                 }
             })
-        }
     }
     /// Saving Data
     func save() {
@@ -153,6 +149,7 @@ struct AddTransactionView: View {
                     editTransaction?.dateAdded = dateAdded
                     editTransaction?.enableReminder = addReminder
                     editTransaction?.reminderID = reminderID
+                  
                 } else {
                     let transaction = Transaction(title: title, remarks: remarks, amount: amount, dateAdded: dateAdded, category: category, tintColor: tint)
                     transaction.enableReminder = addReminder
@@ -182,32 +179,31 @@ struct AddTransactionView: View {
     /// Custom CheckBox
     @ViewBuilder
     func CategoryCheckBox() -> some View {
-        VStack(spacing: 10) {
+        HStack(spacing: 10) {
             ForEach(Category.allCases, id: \.rawValue) { category in
                 HStack(spacing: 5) {
                     ZStack {
                         Image(systemName: "circle")
-                            .font(.title3)
+                            .font(.title)
                             .foregroundStyle(appTint)
                         if self.category == category {
                             Image(systemName: "circle.fill")
-                                .font(.caption)
+                                .font(.headline)
                                 .foregroundStyle(appTint)
                         }
                     }
                     Text(category.rawValue)
-                        .font(.caption)
-                }
+                        .font(.title3)
+                }.hSpacing(.leading)
                 .contentShape(.rect)
+                .foregroundStyle(.colorGrey)
                 .onTapGesture {
                     self.category = category
                 }
             }
-            .padding(2)
+          
         }
-        .padding(.horizontal, 15)
-        .frame(width: 150)
-        .background(.background, in: .rect(cornerRadius: 8))
+      
     }
     /// Notification Toggle
     @ViewBuilder

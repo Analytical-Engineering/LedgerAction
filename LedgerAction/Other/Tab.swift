@@ -7,31 +7,28 @@
 
 import SwiftUI
 
-/// App Tab's
+///Current Active Tabs
 enum Tab: String, CaseIterable {
     case transactions = "Transactions"
     case bills = "Bills"
     case budget = "Budget"
-  case settings = "Settings"
+    case settings = "Settings"
     
-    @ViewBuilder
-    var tabContent: some View {
+    var systemImage: String {
         switch self {
         case .transactions:
-            Image(systemName: "dollarsign")
-            Text(self.rawValue)
+            return "storefront.circle.fill"
+            
         case .bills:
-           Image(systemName:  "dollarsign.arrow.circlepath")
-            Text(self.rawValue)
+            return "dollarsign.arrow.circlepath"
+            
         case .budget:
-            Image(systemName:  "list.clipboard.fill")
-            Text(self.rawValue)
+            return "list.clipboard.fill"
+            
         case .settings:
-            Image(systemName: "gear")
-            Text(self.rawValue)
+          return "gear"
         }
     }
-    
     var index: Int {
         return Tab.allCases.firstIndex(of: self) ?? 0
     }

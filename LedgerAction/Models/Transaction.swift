@@ -20,6 +20,8 @@ class Transaction: Codable {
     var enableReminder: Bool = false
     var reminderID: String = ""
     var budget: Budget.RawValue = Budget.Needs.rawValue
+    @Attribute(.externalStorage)
+    var receipt: Data?
     
     init(
         title: String,
